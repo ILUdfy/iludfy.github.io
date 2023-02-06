@@ -498,9 +498,16 @@ private Dog dog;
 ## @Primary
 > 自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常。
 
- 
+# 多线程
 ## @Async
+1. 在方法上使用该@Async注解，申明该方法是一个异步任务；
+2. 在类上面使用该@Async注解，申明该类中的所有方法都是异步任务；
+3. 使用此注解的方法的类对象，必须是spring管理下的bean对象； 
+4. 要想使用异步任务，需要在主类上开启异步配置，即，配置上@EnableAsync注解
+<https://blog.csdn.net/qq_44750696/article/details/123960134>
+# 参数校验
 ## @Valid,@Valided
+<https://blog.csdn.net/weixin_51439775/article/details/128386125>
 
 # WEB相关
 
@@ -608,7 +615,7 @@ public class TestController {
 发送之后：![页面效果](@ModelAttribute2.png)
 
 
-1. 方法上使用
+2. 方法上使用
    被@ModelAttribute注释的方法会在此controller的每个方法执行前被执行 ，如果有返回值，则自动将该返回值加入到ModelMap中。
    * 若注解没有返回值的方法，一般在方法体内部用model对象手动加入：
   
@@ -647,7 +654,7 @@ public class TestController {
         return "index";
     }
 }
-    ```
+  ```
         
 
 ## @SessionAttributes
@@ -661,9 +668,103 @@ public class TestController {
 
 ## @CrossOrigin
 
-## @ResponseStatus
 ## @RestController
 ## @ControllerAdvice
+@ControllerAdvice的作用也是声明一个控制层组件，通常用于全局异常处理、添加全局数据以及请求参数预处理。
+* 全局异常处理
+  > 搭配@ExceptionHandler注解使用。@ExceptionHandler注解只有一个属性value，是一个Throwable类型的数组，它的作用是设置匹配异常的种类，当Controller层出现value数组内的异常时，将调用被@ExceptionHandler标记的方法。
+
+  > 方法的参数可以包括异常实例、HttpServletRequest、HttpServletResponse、Model等；返回值可以是void、Json（需要用@ResponseBody标记）、ModelAndView（可以添加数据、设置视图名称）、甚至是逻辑视图名。
+
+示例代码：
+```java
+@ControllerAdvice
+public class TestControllerAdvice {
+    @ExceptionHandler(ArithmeticException.class)
+    public ModelAndView exceptionHandler(){
+        System.out.println("出现异常");
+        ModelAndView model = new ModelAndView();
+        model.addObject("msg2","出现异常！");
+        model.setViewName("index");
+        return model;
+    }
+}
+```
+```java
+@Controller
+public class TestController {
+
+    @RequestMapping("/")
+    public String welcome(){
+        int a = 1/0;
+        return "index";
+    }
+}
+```
+浏览器访问该方法时触发ArithmeticException异常，返回页面如下：
+![页面](Spring-Boot常用注解/@ControllerAdvice1.png)
+* 添加全局数据
+  > 搭配@ModelAttribute注解使用。@ModelAttribute标记一个方法，该方法的返回值将作为全局数据，所有Controller层方法和页面都可以访问到。
+
+    示例代码如下：
+    controllerAdvice：
+    ```java
+    @ControllerAdvice
+    public class TestControllerAdvice {
+
+        @ModelAttribute(value = "user")//model中的key
+        public Map<String,String> GlobalConfig(){
+            HashMap<String,String> map = new HashMap<>();
+            map.put("username", "dfy");
+            map.put("age", "18");
+            return map;//model中的value
+        }
+    }
+    ```
+    controller:
+    ```java
+    @Controller
+    public class TestController {
+
+        @RequestMapping("/")
+        public String welcome(Model model){
+            Map<String, Object> map = model.asMap();
+            Set<String> keySet = map.keySet();
+            Iterator<String> iterator = keySet.iterator();
+            while(iterator.hasNext()){
+                String key = iterator.next();
+                Object value = map.get(key);
+                System.out.println(key + "=" + value);
+            }
+            return "index";
+        }
+    }
+    ```
+    页面：
+    ```HTML
+    <p th:text="${user.username}"></p>
+    <p th:text="${user.age}"></p>
+    ```
+    控制台输出为：
+    ```user={age=18, username=dfy}```
+    页面输出为：
+    ![页面](Spring-Boot常用注解/@ControllerAdvice2.png)
+
+* 请求参数预处理
+  搭配@InitBinder注解使用。被@InitBinder标记的方法，参数中必须要含有WebDataBinder，具体用法如下：
+  ```java
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
+    }
+  ```
+  通过WebDataBinder类的registerCustomEditor方法来注册请求参数的预处理器，它的方法参数为：
+  ```registerCustomEditor(Class<?> requiredType, PropertyEditor propertyEditor)```
+  requiredType代表该预处理器处理的数据类型；propertyEditor代表预处理器，它的实现类有很多，这里不一一列举。
+  自定义属性编辑器可以通过继承```java.beans.PropertyEditorSupport```类并重写其```setAsText```方法实现，最后调用setValue(Object Value)方法完成转换后的值的设置。
+
+  还有其他花式用法，具体可参见博客<https://blog.csdn.net/wang0907/article/details/108357696>
+
 ## 元注解包括  @Retention @Target @Document @Inherited四种
 ## @RequestMapping
 ## @GetMapping和@PostMapping
