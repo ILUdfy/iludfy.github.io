@@ -20,7 +20,13 @@
       
         <tags>
             
-            <tag> pytorch,ssd,yolov5,centos </tag>
+            <tag> centos </tag>
+            
+            <tag> pytorch </tag>
+            
+            <tag> ssd </tag>
+            
+            <tag> yolov5 </tag>
             
         </tags>
       
@@ -45,7 +51,9 @@
       
         <tags>
             
-            <tag> spring, spring boot </tag>
+            <tag> spring </tag>
+            
+            <tag> spring boot </tag>
             
         </tags>
       
