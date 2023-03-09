@@ -352,21 +352,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-04
+                    2023-02-06
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.9k
+                    6.2k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    16 分
+                    29 分
                 </div>
                 
 
@@ -813,7 +813,14 @@
 <h2 id="Primary"><a href="#Primary" class="headerlink" title="@Primary"></a>@Primary</h2><blockquote>
 <p>自动装配时当出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常。</p>
 </blockquote>
-<h2 id="Async"><a href="#Async" class="headerlink" title="@Async"></a>@Async</h2><h2 id="Valid-Valided"><a href="#Valid-Valided" class="headerlink" title="@Valid,@Valided"></a>@Valid,@Valided</h2><h1 id="WEB相关"><a href="#WEB相关" class="headerlink" title="WEB相关"></a>WEB相关</h1><h2 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h2><blockquote>
+<h1 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h1><h2 id="Async"><a href="#Async" class="headerlink" title="@Async"></a>@Async</h2><ol>
+<li>在方法上使用该@Async注解，申明该方法是一个异步任务；</li>
+<li>在类上面使用该@Async注解，申明该类中的所有方法都是异步任务；</li>
+<li>使用此注解的方法的类对象，必须是spring管理下的bean对象； </li>
+<li>要想使用异步任务，需要在主类上开启异步配置，即，配置上@EnableAsync注解<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44750696/article/details/123960134">https://blog.csdn.net/qq_44750696/article/details/123960134</a></li>
+</ol>
+<h1 id="参数校验"><a href="#参数校验" class="headerlink" title="参数校验"></a>参数校验</h1><h2 id="Valid-Valided"><a href="#Valid-Valided" class="headerlink" title="@Valid,@Valided"></a>@Valid,@Valided</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_51439775/article/details/128386125">https://blog.csdn.net/weixin_51439775/article/details/128386125</a></p>
+<h1 id="WEB相关"><a href="#WEB相关" class="headerlink" title="WEB相关"></a>WEB相关</h1><h2 id="RequestBody"><a href="#RequestBody" class="headerlink" title="@RequestBody"></a>@RequestBody</h2><blockquote>
 <p>获取request请求体中的内容，常用来处理content-type不是默认的application&#x2F;x-www-form-urlcoded编码（form表单格式）的内容，比如说：application&#x2F;json或者是application&#x2F;xml等。一般情况下来说常用其来处理application&#x2F;json类型。</p>
 </blockquote>
 <blockquote>
@@ -891,7 +898,7 @@
     &lt;p th:text&#x3D;&quot;$&#123;msg2&#125;&quot;&gt;&lt;&#x2F;p&gt;&lt;!--  前端提交表单后，后端再次返回该页面，并将上次输入的信息显示在此处   --&gt;
 &lt;&#x2F;form&gt;</code></pre>
 <p>结果：<br>发送之前：<img src="/2023/02/04/spring-boot-chang-yong-zhu-jie/@ModelAttribute1.png" alt="页面效果"><br>发送之后：<img src="/2023/02/04/spring-boot-chang-yong-zhu-jie/@ModelAttribute2.png" alt="页面效果"></p>
-<ol>
+<ol start="2">
 <li>方法上使用<br>被@ModelAttribute注释的方法会在此controller的每个方法执行前被执行 ，如果有返回值，则自动将该返回值加入到ModelMap中。<ul>
 <li>若注解没有返回值的方法，一般在方法体内部用model对象手动加入：</li>
 </ul>
@@ -939,7 +946,80 @@
 <li>使用注解的types属性：还可以通过模型属性的对象类型指定哪些模型属性需要放到会话中。</li>
 </ul>
 </blockquote>
-<h2 id="CrossOrigin"><a href="#CrossOrigin" class="headerlink" title="@CrossOrigin"></a>@CrossOrigin</h2><h2 id="ResponseStatus"><a href="#ResponseStatus" class="headerlink" title="@ResponseStatus"></a>@ResponseStatus</h2><h2 id="RestController"><a href="#RestController" class="headerlink" title="@RestController"></a>@RestController</h2><h2 id="ControllerAdvice"><a href="#ControllerAdvice" class="headerlink" title="@ControllerAdvice"></a>@ControllerAdvice</h2><h2 id="元注解包括-Retention-Target-Document-Inherited四种"><a href="#元注解包括-Retention-Target-Document-Inherited四种" class="headerlink" title="元注解包括  @Retention @Target @Document @Inherited四种"></a>元注解包括  @Retention @Target @Document @Inherited四种</h2><h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h2><h2 id="GetMapping和-PostMapping"><a href="#GetMapping和-PostMapping" class="headerlink" title="@GetMapping和@PostMapping"></a>@GetMapping和@PostMapping</h2>
+<h2 id="CrossOrigin"><a href="#CrossOrigin" class="headerlink" title="@CrossOrigin"></a>@CrossOrigin</h2><h2 id="RestController"><a href="#RestController" class="headerlink" title="@RestController"></a>@RestController</h2><h2 id="ControllerAdvice"><a href="#ControllerAdvice" class="headerlink" title="@ControllerAdvice"></a>@ControllerAdvice</h2><p>@ControllerAdvice的作用也是声明一个控制层组件，通常用于全局异常处理、添加全局数据以及请求参数预处理。</p>
+<ul>
+<li>全局异常处理<blockquote>
+<p>搭配@ExceptionHandler注解使用。@ExceptionHandler注解只有一个属性value，是一个Throwable类型的数组，它的作用是设置匹配异常的种类，当Controller层出现value数组内的异常时，将调用被@ExceptionHandler标记的方法。</p>
+</blockquote>
+<blockquote>
+<p>方法的参数可以包括异常实例、HttpServletRequest、HttpServletResponse、Model等；返回值可以是void、Json（需要用@ResponseBody标记）、ModelAndView（可以添加数据、设置视图名称）、甚至是逻辑视图名。</p>
+</blockquote>
+</li>
+</ul>
+<p>示例代码：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@ControllerAdvice</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestControllerAdvice</span> <span class="token punctuation">&#123;</span>
+    <span class="token annotation punctuation">@ExceptionHandler</span><span class="token punctuation">(</span><span class="token class-name">ArithmeticException</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">ModelAndView</span> <span class="token function">exceptionHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"出现异常"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">ModelAndView</span> model <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ModelAndView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">addObject</span><span class="token punctuation">(</span><span class="token string">"msg2"</span><span class="token punctuation">,</span><span class="token string">"出现异常！"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        model<span class="token punctuation">.</span><span class="token function">setViewName</span><span class="token punctuation">(</span><span class="token string">"index"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> model<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Controller</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestController</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token annotation punctuation">@RequestMapping</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span>
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">welcome</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token operator">/</span><span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token string">"index"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>浏览器访问该方法时触发ArithmeticException异常，返回页面如下：<br><img src="/Spring-Boot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/@ControllerAdvice1.png" alt="页面"></p>
+<ul>
+<li>添加全局数据<blockquote>
+<p>搭配@ModelAttribute注解使用。@ModelAttribute标记一个方法，该方法的返回值将作为全局数据，所有Controller层方法和页面都可以访问到。</p>
+</blockquote>
+  示例代码如下：<br>  controllerAdvice：  <pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@ControllerAdvice</span></li>
+</ul>
+<p><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestControllerAdvice</span> <span class="token punctuation">&amp;#123;</span></p>
+<pre><code>&lt;span class=&quot;token annotation punctuation&quot;&gt;@ModelAttribute&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;user&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;//model中的key&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;token generics&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;GlobalConfig&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;#123;&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;token generics&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; map &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;HashMap&lt;/span&gt;&lt;span class=&quot;token generics&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    map&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;username&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;dfy&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    map&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;age&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;18&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; map&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;//model中的value&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;&amp;#125;&lt;/span&gt;
+</code></pre>
+<p><span class="token punctuation">&amp;#125;</span></code></pre>:hexoPostRenderEscape–&gt;<br>    controller:<br>    &lt;!–hexoPostRenderEscape:<pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Controller</span><br><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">TestController</span> <span class="token punctuation">&#123;</span></p>
+<pre><code>&lt;span class=&quot;token annotation punctuation&quot;&gt;@RequestMapping&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;welcome&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;Model&lt;/span&gt; model&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;#123;&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;token generics&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; map &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; model&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;asMap&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;Set&lt;/span&gt;&lt;span class=&quot;token generics&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; keySet &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; map&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;keySet&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token class-name&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;token generics&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&gt;&lt;/span&gt;&lt;/span&gt; iterator &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; keySet&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;iterator&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;iterator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;hasNext&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;&amp;#123;&lt;/span&gt;
+        &lt;span class=&quot;token class-name&quot;&gt;String&lt;/span&gt; key &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; iterator&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token class-name&quot;&gt;Object&lt;/span&gt; value &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; map&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;key&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token class-name&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;out&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;key &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;=&quot;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;&amp;#125;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;index&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;&amp;#125;&lt;/span&gt;
+</code></pre>
+<p><span class="token punctuation">&#125;</span></code></pre>:hexoPostRenderEscape–&gt;<br>    页面：<br>    <pre class="language-HTML" data-language="HTML"><code class="language-HTML">&lt;p th:text&#x3D;&quot;$&#123;user.username&#125;&quot;&gt;&lt;&#x2F;p&gt;
+&lt;p th:text&#x3D;&quot;$&#123;user.age&#125;&quot;&gt;&lt;&#x2F;p&gt;</code></pre><br>    控制台输出为：<br>    <code>user=&#123;age=18, username=dfy&#125;</code><br>    页面输出为：<br>    <img src="/Spring-Boot%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/@ControllerAdvice2.png" alt="页面"></p>
+<ul>
+<li><p>请求参数预处理<br>搭配@InitBinder注解使用。被@InitBinder标记的方法，参数中必须要含有WebDataBinder，具体用法如下：</p>
+<pre class="language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@InitBinder</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">initBinder</span><span class="token punctuation">(</span><span class="token class-name">WebDataBinder</span> binder<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+  binder<span class="token punctuation">.</span><span class="token function">registerCustomEditor</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">StringTrimmerEditor</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>通过WebDataBinder类的registerCustomEditor方法来注册请求参数的预处理器，它的方法参数为：<br><code>registerCustomEditor(Class&lt;?&gt; requiredType, PropertyEditor propertyEditor)</code><br>requiredType代表该预处理器处理的数据类型；propertyEditor代表预处理器，它的实现类有很多，这里不一一列举。<br>自定义属性编辑器可以通过继承<code>java.beans.PropertyEditorSupport</code>类并重写其<code>setAsText</code>方法实现，最后调用setValue(Object Value)方法完成转换后的值的设置。</p>
+<p>还有其他花式用法，具体可参见博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/wang0907/article/details/108357696">https://blog.csdn.net/wang0907/article/details/108357696</a></p>
+</li>
+</ul>
+<h2 id="元注解包括-Retention-Target-Document-Inherited四种"><a href="#元注解包括-Retention-Target-Document-Inherited四种" class="headerlink" title="元注解包括  @Retention @Target @Document @Inherited四种"></a>元注解包括  @Retention @Target @Document @Inherited四种</h2><h2 id="RequestMapping"><a href="#RequestMapping" class="headerlink" title="@RequestMapping"></a>@RequestMapping</h2><h2 id="GetMapping和-PostMapping"><a href="#GetMapping和-PostMapping" class="headerlink" title="@GetMapping和@PostMapping"></a>@GetMapping和@PostMapping</h2>
                 
             </div>
             <hr/>
@@ -1083,18 +1163,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/02/04/spring-boot-chang-yong-zhu-jie/">
+                <a href="/2023/03/08/centos7-xia-pei-zhi-ssd-he-yolov5-de-huan-jing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Spring Boot常用注解">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="centos7下配置ssd和yolov5的环境">
                         
-                        <span class="card-title">Spring Boot常用注解</span>
+                        <span class="card-title">centos7下配置ssd和yolov5的环境</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1104,27 +1183,26 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-04
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/spring-boot/" class="post-category">
-                                    spring boot
+                            <a href="/categories/pytorch/" class="post-category">
+                                    pytorch
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/spring-spring-boot/">
-                        <span class="chip bg-color">spring, spring boot</span>
+                    <a href="/tags/pytorch-ssd-yolov5-centos/">
+                        <span class="chip bg-color">pytorch,ssd,yolov5,centos</span>
                     </a>
                     
                 </div>
@@ -1371,7 +1449,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">6.4k</span>
+                        class="white-color">10k</span>
             
             
             
