@@ -8,7 +8,7 @@
       <link href="/2023/03/14/matlab-bian-yi-dll-wen-jian/"/>
       <url>/2023/03/14/matlab-bian-yi-dll-wen-jian/</url>
       
-        <content type="html"><![CDATA[<h1 id="matlab编译dll文件"><a href="#matlab编译dll文件" class="headerlink" title="matlab编译dll文件"></a>matlab编译dll文件</h1><p>1.命令行窗口输入：<code>deploytool</code>，会出现如下弹窗：<br><img src="/./matlab%E7%BC%96%E8%AF%91dll%E6%96%87%E4%BB%B6/deploytool.png" alt="img"></p><p>选择第三个，出现下面的窗口，按图示操作：</p><p><img src="/./matlab%E7%BC%96%E8%AF%91dll%E6%96%87%E4%BB%B6/deploytool2.png" alt="img"></p><p>打包好后会出现三个文件夹：</p><p><img src="/./matlab%E7%BC%96%E8%AF%91dll%E6%96%87%E4%BB%B6/deploytool3.png" alt="img"></p><ol><li>for_redistribution文件夹下存放一个exe文件，它用来安装使用dll库所需要的matlab环境，一般在没有matlab的机器上，可以使用该文件快捷安装所需环境；</li><li>for_redistribution_files_only文件夹下就是编译生成的库文件、头文件和dll文件了</li></ol>]]></content>
+        <content type="html"><![CDATA[<h1 id="matlab编译dll文件"><a href="#matlab编译dll文件" class="headerlink" title="matlab编译dll文件"></a>matlab编译dll文件</h1><p>1.命令行窗口输入：<code>deploytool</code>，会出现如下弹窗：<br><img src="/2023/03/14/matlab-bian-yi-dll-wen-jian/deploytool.png" alt="img"></p><p>选择第三个，出现下面的窗口，按图示操作：</p><p><img src="/2023/03/14/matlab-bian-yi-dll-wen-jian/deploytool2.png" alt="img"></p><p>打包好后会出现三个文件夹：</p><p><img src="/2023/03/14/matlab-bian-yi-dll-wen-jian/deploytool3.png" alt="img"></p><ol><li>for_redistribution文件夹下存放一个exe文件，它用来安装使用dll库所需要的matlab环境，一般在没有matlab的机器上，可以使用该文件快捷安装所需环境；</li><li>for_redistribution_files_only文件夹下就是编译生成的库文件、头文件和dll文件了</li></ol>]]></content>
       
       
       
@@ -39,13 +39,13 @@
       
         <tags>
             
-            <tag> centos </tag>
-            
             <tag> pytorch </tag>
             
             <tag> ssd </tag>
             
             <tag> yolov5 </tag>
+            
+            <tag> centos </tag>
             
         </tags>
       
