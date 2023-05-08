@@ -357,21 +357,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-04-21
+                    2023-05-08
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.2k
+                    4.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    20 分
                 </div>
                 
 
@@ -400,12 +400,12 @@
 <li>CUDA版本：<strong>CUDA 11.1</strong></li>
 <li>操作系统： <strong>centos7</strong></li>
 </ol>
-<h2 id="一、下载源文件"><a href="#一、下载源文件" class="headerlink" title="一、下载源文件"></a>一、下载源文件</h2><p>opencv源文件官网链接如下，选择Sources版本下载即可，网盘中附带4.4.0版本：<br><a target="_blank" rel="noopener" href="https://opencv.org/releases/">Opencv官方下载地址</a><br>下载Contrib对应版本：<br><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv_contrib/releases">Opencv_Contrib下载地址</a></p>
+<h2 id="cuda和cudnn安装请看我的另一篇博客"><a href="#cuda和cudnn安装请看我的另一篇博客" class="headerlink" title="cuda和cudnn安装请看我的另一篇博客"></a>cuda和cudnn安装请看我的另一篇博客</h2><h3 id="温馨提示，在编译支持cuda的opencv之前，要先安装好cuda和cudnn，不然会报错的呢"><a href="#温馨提示，在编译支持cuda的opencv之前，要先安装好cuda和cudnn，不然会报错的呢" class="headerlink" title="温馨提示，在编译支持cuda的opencv之前，要先安装好cuda和cudnn，不然会报错的呢~"></a>温馨提示，在编译支持cuda的opencv之前，要先安装好cuda和cudnn，不然会报错的呢~</h3><h2 id="一、下载源文件"><a href="#一、下载源文件" class="headerlink" title="一、下载源文件"></a>一、下载源文件</h2><p>opencv源文件官网链接如下，选择Sources版本下载即可，网盘中附带4.4.0版本：<br><a target="_blank" rel="noopener" href="https://opencv.org/releases/">Opencv官方下载地址</a><br>下载Contrib对应版本：<br><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv_contrib/releases">Opencv_Contrib下载地址</a></p>
 <h2 id="二、解压"><a href="#二、解压" class="headerlink" title="二、解压"></a>二、解压</h2><p>下载到的是zip格式的压缩包，使用unzip命令解压即可，解压到你想的位置，本文中一用户主目录(&#x2F;home&#x2F;dfy)为例：</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">unzip</span> opencv-4.4.0.zip
 <span class="token function">unzip</span> opencv_contrib-4.4.0.zip</code></pre>
 
-<h2 id="三、安装需要的依赖"><a href="#三、安装需要的依赖" class="headerlink" title="三、安装需要的依赖"></a>三、安装需要的依赖</h2><p>组内的服务器使用的是centos7系统，需要安装的依赖如下，ubuntu中安装方式请自行搜索：</p>
+<h2 id="三、安装需要的依赖"><a href="#三、安装需要的依赖" class="headerlink" title="三、安装需要的依赖"></a>三、安装需要的依赖</h2><h3 id="centos系统"><a href="#centos系统" class="headerlink" title="centos系统"></a>centos系统</h3><p>组内的服务器使用的是centos7系统，需要安装的依赖如下：</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> yum <span class="token parameter variable">-y</span> <span class="token function">install</span> epel-release
 <span class="token function">sudo</span> yum <span class="token parameter variable">-y</span> <span class="token function">install</span> <span class="token function">git</span> gcc gcc-c++ cmake3 <span class="token comment"># 看到这里的gcc了吗，没错，这里隐藏着一个陨石坑，在后续安装记录章节细说</span>
 <span class="token function">sudo</span> yum <span class="token parameter variable">-y</span> <span class="token function">install</span> qt5-qtbase-devel
@@ -444,6 +444,19 @@ yum <span class="token function">install</span> tesseract-langpack-chi_sim.noarc
 <span class="token comment">#检查「tesseract」支持的语言</span>
 tesseract --list-langs</code></pre>
 
+<h3 id="ubuntu系统"><a href="#ubuntu系统" class="headerlink" title="ubuntu系统"></a>ubuntu系统</h3><pre class="language-none"><code class="language-none">$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get install build-essential cmake unzip pkg-config
+$ sudo apt-get install libjpeg-dev libpng-dev libtiff-dev
+$ sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev
+$ sudo apt-get install libv4l-dev libxvidcore-dev libx264-dev
+$ sudo apt-get install libgtk-3-dev
+$ sudo apt-get install libatlas-base-dev gfortran
+$ sudo apt-get install python3-dev</code></pre>
+
+<h3 id="安装numpy"><a href="#安装numpy" class="headerlink" title="安装numpy"></a>安装numpy</h3><pre class="language-none"><code class="language-none"># 执行这一步之前，激活你要使用的python虚拟环境
+pip install numpy</code></pre>
+
 <h2 id="四、执行cmake"><a href="#四、执行cmake" class="headerlink" title="四、执行cmake"></a>四、执行cmake</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 进入opencv的解压目录</span>
 <span class="token builtin class-name">cd</span> ~/opencv-4.4.0
 
@@ -454,28 +467,48 @@ tesseract --list-langs</code></pre>
 <span class="token comment"># 执行cmake</span>
 <span class="token comment"># 这里一些参数的配置一定要仔细再仔细</span>
 <span class="token comment"># 我的参数配置如下</span>
-cmake3 <span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_BUILD_TYPE</span><span class="token operator">=</span>RELEASE <span class="token punctuation">\</span> 
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/home/dfy/anaconda3/envs/mouse/ <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_EXTRA_MODULES_PATH</span><span class="token operator">=</span>/home/dfy/opencv_contrib-4.4.0/modules <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON_EXECUTABLE</span><span class="token operator">=</span>/home/dfy/anaconda3/envs/mouse/bin/python3.9 <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_CUDA</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">CUDA_ARCH_BIN</span><span class="token operator">=</span><span class="token number">8.6</span> <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">ENABLE_FAST_MATH</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">CUDA_FAST_MATH</span><span class="token operator">=</span>ON  <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_CUBLAS</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
-       <span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_GENERATE_PKGCONFIG</span><span class="token operator">=</span>YES <span class="token punctuation">\</span>
+<span class="token comment"># centos系统如果提示cmake版本不够，这里输入cmake3</span>
+cmake <span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_BUILD_TYPE</span><span class="token operator">=</span>RELEASE <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">CMAKE_INSTALL_PREFIX</span><span class="token operator">=</span>/usr/local <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">INSTALL_PYTHON_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">INSTALL_C_EXAMPLES</span><span class="token operator">=</span>OFF <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_ENABLE_NONFREE</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_CUDA</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_CUDNN</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_DNN_CUDA</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">ENABLE_FAST_MATH</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">CUDA_FAST_MATH</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">CUDA_ARCH_BIN</span><span class="token operator">=</span><span class="token number">8.6</span> <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">WITH_CUBLAS</span><span class="token operator">=</span><span class="token number">1</span> <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">OPENCV_EXTRA_MODULES_PATH</span><span class="token operator">=~</span>/opencv_contrib-4.4.0/modules <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">HAVE_opencv_python3</span><span class="token operator">=</span>ON <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">PYTHON_EXECUTABLE</span><span class="token operator">=</span>/usr/local/bin/python3 <span class="token punctuation">\</span>
+        <span class="token parameter variable">-D</span> <span class="token assign-left variable">BUILD_EXAMPLES</span><span class="token operator">=</span>ON <span class="token punctuation">..</span>
        <span class="token punctuation">..</span></code></pre>
 <p>详细解释一下命令中各个参数选取的注意事项：</p>
 <blockquote>
 <ol>
-<li>CMAKE_INSTALL_PREFIX，意思是cmake执行后opencv的安装路径。<br>这里要格外小心，网上一些教程里面默认使用&#x2F;usr&#x2F;local目录，本人试过之后发现虽然安装成功，但是无法调用。<br>是因为，我的代码在anaconda的虚拟环境内运行，所以该模块的安装位置要设置成anaconda虚拟环境的目录。<br>该目录一般在anaconda安装目录下的envs下，envs目录存放着你自定义的虚拟环境，具体要安装到哪个环境自己选择。可以参考我的目录：&#x2F;home&#x2F;dfy&#x2F;anaconda3&#x2F;envs&#x2F;mouse&#x2F;</li>
-<li>OPENCV_EXTRA_MODULES_PATH，翻译过来就是opencv额外模块路径，这个模块就是我们下载的Contrib模块。所以这项参数填写你的opencv_contrib目录下modules文件夹的路径。如果你是按照上面的教程走的，那么它现在应该在你的用户主目录下：&#x2F;home&#x2F;dfy&#x2F;opencv_contrib-4.4.0&#x2F;modules。</li>
-<li>PYTHON_EXECUTABLE，python虚拟环境路径，它需要指向你的环境中python的可执行文件。若是anaconda的虚拟环境，它一般在虚拟环境目录下的bin目录下：&#x2F;home&#x2F;dfy&#x2F;anaconda3&#x2F;envs&#x2F;mouse&#x2F;bin&#x2F;python3.9。<br>python版本可能很多，指定你所需版本的python可执行文件。</li>
+<li>OPENCV_EXTRA_MODULES_PATH，翻译过来就是opencv额外模块路径，这个模块就是我们下载的Contrib模块。所以这项参数填写你的opencv_contrib目录下modules文件夹的路径。如果你是按照上面的教程走的，那么它现在应该在你的用户主目录下：~&#x2F;opencv_contrib-4.4.0&#x2F;modules。</li>
+<li>PYTHON_EXECUTABLE，python虚拟环境路径，它需要指向你的环境中python的可执行文件。若是anaconda的虚拟环境，它一般在虚拟环境目录下的bin目录下：~&#x2F;anaconda3&#x2F;envs&#x2F;mouse&#x2F;bin&#x2F;python3.9,或者是系统的python3：&#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3(不建议，我虽然是这么做的，但是我是在docker镜像内操作，系统本身的python关系到系统的运行，比较危险，如果实在要用，可以安装一下其他版本的python，用其他版本来操作)<br>python版本可能很多，指定你所需版本的python可执行文件。</li>
 <li>CUDA_ARCH_BIN，这里指的是你的cuda版本对应的算力级别。去<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-gpus#collapseOne">cuda官网</a>查看一下。组内服务器的显卡是3090，cuda版本我装的是11.1，官网上写着对应的算力级别为8.6，所以这里填8.6。</li>
-<li>命令最后两个点不能落下！！！</li>
+<li>命令最后两个点不能落下，这两个点代表相对路径。</li>
 </ol>
 </blockquote>
 <p>以上是实际应用中需要自己确定的问题，其他的按照我写的命令复制即可。<br>我在执行cmake的时候报了一些错误，很多个failed，但是实际使用并没什么问题。<br>如果你执行命令之后，发现你的cmake参数配置有错误，那么你需要删除build目录重新执行这一步骤。</p>
+<p><strong>在执行下一步之前，你需要检查cmake的输出，有个至关重要的点：</strong><br>检查cmake输出中有没有这个模块：</p>
+<pre class="language-none"><code class="language-none">--   Python 3:
+--     Interpreter:                 &#x2F;usr&#x2F;local&#x2F;bin&#x2F;python3 (ver 3.9.16)
+--     Libraries:                   &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libpython3.9.so (ver 3.9.16)
+--     numpy:                       &#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;site-packages&#x2F;numpy&#x2F;core&#x2F;include (ver 1.24.2)
+--     install path:                lib&#x2F;python3.9&#x2F;site-packages&#x2F;cv2&#x2F;python-3.9</code></pre>
+<p>如果没有这一块，没必要往下走了，因为安装完也没有用。你需要检查你的python环境是否具有python3的条件。<br>这里输出的<code>install path</code>后面要用到，先记下来。</p>
+<p>其他的信息你可以检查一下你配置是否正确，例如下面：</p>
+<pre class="language-none"><code class="language-none">NVIDIA CUDA:                   YES (ver 11.1, CUFFT CUBLAS FAST_MATH)
+  NVIDIA GPU arch:             86
+  NVIDIA PTX archs:
+  
+cuDNN:                         YES (ver 8.7.0)</code></pre>
+
 <h2 id="五、安装"><a href="#五、安装" class="headerlink" title="五、安装"></a>五、安装</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">make</span> -j<span class="token variable"><span class="token variable">$(</span>nproc<span class="token variable">)</span></span></code></pre>
 <p>安装过程中也会踩很多很多很多很多很多的陨石坑，在这里记录一下（本人被折磨的不轻）</p>
 <h3 id="1-Unsupported-gpu-architecture-‘compute-30’"><a href="#1-Unsupported-gpu-architecture-‘compute-30’" class="headerlink" title="1.Unsupported gpu architecture ‘compute_30’"></a>1.Unsupported gpu architecture ‘compute_30’</h3><p>翻译过来就是gpu算力不支持，说明你在cmake的CUDA_ARCH_BIN设置和你的显卡和cuda不匹配，去<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-gpus#collapseOne">cuda官网</a>找你的显卡对应的算力。</p>
@@ -502,11 +535,96 @@ collect2: error: ld returned 1 exit status
 samples&#x2F;gpu&#x2F;CMakeFiles&#x2F;example_gpu_surf_keypoint_matcher.dir&#x2F;build.make:132: recipe for target &#39;bin&#x2F;example_gpu_surf_keypoint_matcher&#39; failed
 make[2]: *** [bin&#x2F;example_gpu_surf_keypoint_matcher] Error 1</code></pre>
 <p>解决方法：<br>先去你的build目录下找到这个文件:<br><code>&lt;build_dir&gt;/samples/gpu/CMakeFiles/example_gpu_surf_keypoint_matcher.dir/link.txt</code><br>在这个文件里，搜索到<code>--as-needed CMakeFiles/example_gpu_surf_keypoint_matcher.dir/surf_keypoint_matcher.cpp.o</code>这一句之后加上<code>&lt;build_dir&gt;/modules/xfeatures2d/CMakeFiles/opencv_xfeatures2d.dir/src/surf.cuda.cpp.o &lt;build_dir&gt;/modules/xfeatures2d/CMakeFiles/cuda_compile_1.dir/src/cuda/cuda_compile_1_generated_surf.cu.o</code><br>其中，<build_dir>是你的构建路径，也就是第四步中创建的build文件夹。</p>
+<h3 id="6-libopencv-imgcodecs-so-4-2-0-undefined-reference-to-96-x54-x49-x46-70-x52-x65-x61-100-82-x47-x42-x41-83-116-x72-105-112-64-x4c-x49-66-84-x49-x46-x46-x5f-52-46-48"><a href="#6-libopencv-imgcodecs-so-4-2-0-undefined-reference-to-96-x54-x49-x46-70-x52-x65-x61-100-82-x47-x42-x41-83-116-x72-105-112-64-x4c-x49-66-84-x49-x46-x46-x5f-52-46-48" class="headerlink" title="6.libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;&#x54;&#x49;&#x46;&#70;&#x52;&#x65;&#x61;&#100;&#82;&#x47;&#x42;&#x41;&#83;&#116;&#x72;&#105;&#112;&#64;&#x4c;&#x49;&#66;&#84;&#x49;&#x46;&#x46;&#x5f;&#52;&#46;&#48;"></a>6.libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;<a href="mailto:&#x54;&#x49;&#x46;&#70;&#x52;&#x65;&#x61;&#100;&#82;&#x47;&#x42;&#x41;&#83;&#116;&#x72;&#105;&#112;&#64;&#x4c;&#x49;&#66;&#84;&#x49;&#x46;&#x46;&#x5f;&#52;&#46;&#48;">&#x54;&#x49;&#x46;&#70;&#x52;&#x65;&#x61;&#100;&#82;&#x47;&#x42;&#x41;&#83;&#116;&#x72;&#105;&#112;&#64;&#x4c;&#x49;&#66;&#84;&#x49;&#x46;&#x46;&#x5f;&#52;&#46;&#48;</a></h3><p>完整报错信息：<br> <pre class="language-none"><code class="language-none">&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFReadRGBAStrip@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFReadDirectory@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFWriteEncodedStrip@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFIsTiled@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFWriteScanline@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFGetField@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFScanlineSize@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFWriteDirectory@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFReadEncodedTile@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFReadRGBATile@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFClose@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFClientOpen@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFRGBAImageOK@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFOpen@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFReadEncodedStrip@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFSetField@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFSetWarningHandler@LIBTIFF_4.0&#39;
+&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0: undefined reference to &#96;TIFFSetErrorHandler@LIBTIFF_4.0</code></pre></p>
+<p> 库引用的问题，从报错信息中可以看到是<code>libopencv_imgcodecs.so.4.2.0</code>这个库引用不到一个名字含有<code>TIFF</code>的库。<br> 首先你要检查依赖：<code>libtiff-dev</code>是否正确安装。<br> 如果正确安装后还是出现这个问题，那么可能是你的python环境下没有这个库，你需要复制一份到你的python环境下。<br> 具体操作如下：</p>
+<pre class="language-none"><code class="language-none"># 先查看报错信息，发现是&#96;&#96;&#96;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0&#96;&#96;&#96;库引用不到其他库
+# 查看这个库的依赖
+ldd &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgcodecs.so.4.2.0
+
+# 输出如下
+linux-vdso.so.1 &#x3D;&gt;  (0x00007ffdc29f5000)
+      libopencv_imgproc.so.4.2 &#x3D;&gt; &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_imgproc.so.4.2 (0x00007fc9c680c000)
+      libjpeg.so.8 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libjpeg.so.8 (0x00007fc9c65b3000)
+      libpng12.so.0 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libpng12.so.0 (0x00007fc9c638e000)
+      libtiff.so.5 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libtiff.so.5 (0x00007fc9c6119000)
+      libjasper.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libjasper.so.1 (0x00007fc9c5ec4000)
+      libIlmImf-2_2.so.22 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libIlmImf-2_2.so.22 (0x00007fc9c59f5000)
+      libopencv_core.so.4.2 &#x3D;&gt; &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libopencv_core.so.4.2 (0x00007fc9c5318000)
+      libstdc++.so.6 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libstdc++.so.6 (0x00007fc9c4f96000)
+      libm.so.6 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libm.so.6 (0x00007fc9c4c8d000)
+      libgcc_s.so.1 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libgcc_s.so.1 (0x00007fc9c4a77000)
+      libpthread.so.0 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libpthread.so.0 (0x00007fc9c485a000)
+      libc.so.6 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libc.so.6 (0x00007fc9c4490000)
+      libz.so.1 &#x3D;&gt; &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libz.so.1 (0x00007fc9c4272000)
+      liblzma.so.5 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;liblzma.so.5 (0x00007fc9c4050000)
+      libjbig.so.0 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libjbig.so.0 (0x00007fc9c3e42000)
+      libHalf.so.12 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libHalf.so.12 (0x00007fc9c3bff000)
+      libIex-2_2.so.12 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libIex-2_2.so.12 (0x00007fc9c39e1000)
+      libIlmThread-2_2.so.12 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libIlmThread-2_2.so.12 (0x00007fc9c37da000)
+      libdl.so.2 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libdl.so.2 (0x00007fc9c35d6000)
+      librt.so.1 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;librt.so.1 (0x00007fc9c33ce000)
+      libGL.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;mesa&#x2F;libGL.so.1 (0x00007fc9c315a000)
+      &#x2F;lib64&#x2F;ld-linux-x86-64.so.2 (0x00007fc9c73b1000)
+      libexpat.so.1 &#x3D;&gt; &#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libexpat.so.1 (0x00007fc9c2f31000)
+      libxcb-dri3.so.0 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxcb-dri3.so.0 (0x00007fc9c2d2e000)
+      libxcb-present.so.0 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxcb-present.so.0 (0x00007fc9c2b2b000)
+      libxcb-sync.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxcb-sync.so.1 (0x00007fc9c2924000)
+      libxshmfence.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxshmfence.so.1 (0x00007fc9c2721000)
+      libglapi.so.0 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libglapi.so.0 (0x00007fc9c24f0000)
+      libXext.so.6 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libXext.so.6 (0x00007fc9c22de000)
+      libXdamage.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libXdamage.so.1 (0x00007fc9c20db000)
+      libXfixes.so.3 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libXfixes.so.3 (0x00007fc9c1ed5000)
+      libX11-xcb.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libX11-xcb.so.1 (0x00007fc9c1cd3000)
+      libX11.so.6 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libX11.so.6 (0x00007fc9c1999000)
+      libxcb-glx.so.0 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxcb-glx.so.0 (0x00007fc9c1780000)
+      libxcb-dri2.so.0 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxcb-dri2.so.0 (0x00007fc9c157b000)
+      libxcb.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libxcb.so.1 (0x00007fc9c1359000)
+      libXxf86vm.so.1 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libXxf86vm.so.1 (0x00007fc9c1153000)
+      libdrm.so.2 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libdrm.so.2 (0x00007fc9c0f41000)
+      libXau.so.6 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libXau.so.6 (0x00007fc9c0d3d000)
+      libXdmcp.so.6 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libXdmcp.so.6 (0x00007fc9c0b37000)
+
+# 你需要在这些依赖中找到报错信息中找不到的那个库。
+# 这个库在这里：
+libtiff.so.5 &#x3D;&gt; &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libtiff.so.5 (0x00007fc9c6119000)
+
+# 把这个库复制到你的python环境下：
+sudo cp &#x2F;usr&#x2F;lib&#x2F;x86_64-linux-gnu&#x2F;libtiff.so.5 &#x2F;usr&#x2F;local&#x2F;lib&#x2F;libtiff.so.5</code></pre>
+
 <p>不出意外的话应该是没什么其他的问题了。</p>
 <p>make完成后，执行：</p>
 <pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span></code></pre>
 
-<h2 id="六、测试"><a href="#六、测试" class="headerlink" title="六、测试"></a>六、测试</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#激活你安装了opencv的虚拟环境</span>
+<h2 id="六、链接动态库"><a href="#六、链接动态库" class="headerlink" title="六、链接动态库"></a>六、链接动态库</h2><p>安装完成后，在之前cmake输出的python3 <code>install path</code>路径下，会出现一个库：<br>我之前这里输出的<code>install path = lib/python3.9/site-packages/cv2/python-3.9</code>，在这个路径前加上安装前缀<code>CMAKE_INSTALL_PREFIX=/usr/local</code></p>
+<pre class="language-none"><code class="language-none">ls -l &#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;site-packages&#x2F;cv2&#x2F;python-3.9
+
+
+总计 9540
+-rw-r--r-- 1 root root 9768648  5月  4 17:51 cv2.cpython-39-x86_64-linux-gnu.so
+</code></pre>
+<p>把这个库连接到你的python环境下：</p>
+<pre class="language-none"><code class="language-none">cd &#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;site-packages #这里要看你自己的python环境路径，我是使用的系统的python，所以库直接生成在了我需要的python环境下，这一步对我其实可以省略
+ln -s &#x2F;usr&#x2F;local&#x2F;lib&#x2F;python3.9&#x2F;site-packages&#x2F;cv2&#x2F;python3.9&#x2F;cv2.cpython-39-x86_64-linux-gnu.so cv2.so</code></pre>
+
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment">#激活你安装了opencv的虚拟环境，如果你用的系统python，这一步不需要</span>
 conda activate mouse
 
 <span class="token comment">#打开python</span>
@@ -663,18 +781,17 @@ cv2.__version__
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/04/21/zhi-chi-cuda-de-opencv-bian-yi-liu-cheng/">
+                <a href="/2023/05/08/ubuntu-an-zhuang-mysql8-0-liu-cheng-ji-lu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="支持cuda的opencv编译流程">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="ubuntu安装mysql8.0流程记录">
                         
-                        <span class="card-title">支持cuda的opencv编译流程</span>
+                        <span class="card-title">ubuntu安装mysql8.0流程记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -684,31 +801,30 @@ cv2.__version__
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-04-21
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-05-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/opencv/" class="post-category">
-                                    opencv
+                            <a href="/categories/mysql/" class="post-category">
+                                    mysql
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/cuda/">
-                        <span class="chip bg-color">cuda</span>
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
                     </a>
                     
-                    <a href="/tags/opencv/">
-                        <span class="chip bg-color">opencv</span>
+                    <a href="/tags/ubuntu/">
+                        <span class="chip bg-color">ubuntu</span>
                     </a>
                     
                 </div>
@@ -905,7 +1021,7 @@ cv2.__version__
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">14.2k</span>
+                        class="white-color">16.7k</span>
             
             
             
