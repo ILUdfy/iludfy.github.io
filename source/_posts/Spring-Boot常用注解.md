@@ -1,6 +1,8 @@
 ---
 title: Spring Boot常用注解
-tags: 'spring, spring boot'
+tags:  
+    - spring
+    - spring boot
 categories: spring boot
 date: 2023-02-04 17:29:24
 ---
@@ -708,7 +710,7 @@ public class TestController {
 
     示例代码如下：
     controllerAdvice：
-    ```java
+```java
     @ControllerAdvice
     public class TestControllerAdvice {
 
@@ -720,9 +722,9 @@ public class TestController {
             return map;//model中的value
         }
     }
-    ```
-    controller:
-    ```java
+```
+controller:
+```java
     @Controller
     public class TestController {
 
@@ -739,16 +741,16 @@ public class TestController {
             return "index";
         }
     }
-    ```
-    页面：
-    ```HTML
+```
+页面：
+```HTML
     <p th:text="${user.username}"></p>
     <p th:text="${user.age}"></p>
-    ```
-    控制台输出为：
-    ```user={age=18, username=dfy}```
-    页面输出为：
-    ![页面](Spring-Boot常用注解/@ControllerAdvice2.png)
+```
+控制台输出为：
+```user={age=18, username=dfy}```
+页面输出为：
+![页面](@ControllerAdvice2.png)
 
 * 请求参数预处理
   搭配@InitBinder注解使用。被@InitBinder标记的方法，参数中必须要含有WebDataBinder，具体用法如下：
