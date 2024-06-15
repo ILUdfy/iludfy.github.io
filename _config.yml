@@ -116,5 +116,5 @@ theme: hexo-theme-matery-develop
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@private.github.com:ILUdfy/iludfy.github.io
+  repo: git@github.com:ILUdfy/iludfy.github.io
   branch: master

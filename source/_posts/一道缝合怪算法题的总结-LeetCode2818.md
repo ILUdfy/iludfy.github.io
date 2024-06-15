@@ -7,6 +7,7 @@ tags:
  - 快速幂
  - 贪心
 categories: 算法
+mathjax: true
 ---
 
 [2818.操作使得分最大]([2818. 操作使得分最大 - 力扣（LeetCode）](https://leetcode.cn/problems/apply-operations-to-maximize-score/description/))

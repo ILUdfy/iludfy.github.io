@@ -5,6 +5,7 @@ tags:
  - 图
  - Dijkstra
 categories: 算法
+mathjax: true
 ---
 
 ## Dijkstra算法介绍
@@ -65,7 +66,7 @@ public int shortestPath(int node1, int node2) {
 
 
 
-也可以用优先队列来优化，总时间复杂度为$$O(mlogm$$)
+也可以用优先队列来优化，总时间复杂度为$$O(mlogm)$$
 
 ```java
 public int shortestPath(int node1, int node2) {

@@ -5,6 +5,7 @@ tags:
  - LIS
  - 二分查找
 categories: 算法
+mathjax: true
 ---
 [leetcode 300 最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/description/)
 
